@@ -11,6 +11,11 @@ class Product(db.Model):
     description = db.Column(db.String(255), nullable=False)
     category = db.Column(db.String)
 
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    
+    user = db.relationship('User', back_populates='products')
+    reviews = db.relationship('Review', back_populates='products')
+
     @validates("category")
     def validate_category(self, value):
         # if trying to see if the category exists

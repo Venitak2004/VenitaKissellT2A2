@@ -1,5 +1,6 @@
 from init import ma
 from models.review import Review
+from schema.review_schema import ReviewSchema
 from marshmallow import Schema, fields, validate
 
 class ReviewSchema(ma.SQLAlchemyAutoSchema):
