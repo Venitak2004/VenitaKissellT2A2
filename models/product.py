@@ -1,30 +1,24 @@
 from init import db
-from marshmallow import validates
+from marshmallow import validates, ValidationError
 
-VALID_CATEGORY = ("Beauty", "Technology", "Toys", "Furniture", "Sport", "Household Goods", "Electrical", "Other")
-
-
-
+VALID_CATEGORIES = ("Beauty", "Technology", "Toys", "Furniture", "Sport", "Household Goods", "Electrical", "Other")
 
 class Product(db.Model):
+    __tablename__ = "products"
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    category = db.column(db.String)
+    category = db.Column(db.String)
 
-    @validates("status")
+    @validates("category")
     def validate_category(self, value):
-        # if trying to see the category exists
-        if value == VALID_CATEGORY[1]:
+        # if trying to see if the category exists
+        if value not in VALID_CATEGORIES:
             # check whether an existing Category exists or not
-            # SELECT COUNT(*) FROM table_name WHERE status="Technology"
-            stmt = db.select(db.func.count()).select_from(Product).filter_by(status=VALID_CATEGORY[1])
-            count = db.session.scalar(stmt)
-            # if it exists
-            if count > 0:
-                # send error message
-                return ("No category review exists")
-
-
+            raise ValidationError(f"Invalid Category: {value}. Please choose one of the {VALID_CATEGORIES}.")
+       #The correct value is returned to the user
+        return value
+            
     def __repr__(self):
         return f'<Product {self.name}>'

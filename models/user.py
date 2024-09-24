@@ -3,6 +3,8 @@ from init import db
   #install the user table attributes
     #define the primary key for data serialisation
 class User(db.Model):
+    __tablename__ = 'user'
+    
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     display_name = db.Column(db.String)

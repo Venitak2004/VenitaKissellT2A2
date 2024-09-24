@@ -11,6 +11,7 @@ products_schema = ProductSchema(many=True)
 def add_product():
     name = request.json.get('name')
     description = request.json.get('description')
+    category = request.json.get('category')
     
     new_product = Product(name=name, description=description)
     db.session.add(new_product)
