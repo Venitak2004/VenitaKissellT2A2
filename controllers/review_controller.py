@@ -5,8 +5,6 @@ from marshmallow.exceptions import ValidationError
 from init import db
 
 review_bp = Blueprint('review', __name__)
-review_schema = ReviewSchema()
-reviews_schema = ReviewSchema(many=True)
 
 @review_bp.route('/reviews', methods=['POST'])
 def add_review():

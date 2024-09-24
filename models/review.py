@@ -1,5 +1,7 @@
-from init import db
+from init import db, ma
 from datetime import date
+from marshmallow import fields, validate
+from marshmallow.validate import Regexp, OneOf
 
 class Review(db.Model):
     __tablename__ = "reviews"
@@ -12,9 +14,24 @@ class Review(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
        
-    user = db.relationship('User', back_populates='reviews')  
+    user = db.relationship('User', back_populates='reviews', cascade='all, delete')  
     products = db.relationship('Product', back_populates='reviews')
    
 
-    def __repr__(self):
-        return f'<Review {self.id}>'
+class ReviewSchema(ma.Schema):
+
+    user = fields.Nested("UserSchema", only=["name", "email"])
+    product = fields.Nested("CardSchema", exclude=["comments"])
+    
+    #this will ensure any data inserted will have to adhere to the listed specifications
+    rating = fields.Int(required=True, validate=validate.Range(min=1, max=5))
+    comment = fields.Str(required=True, validate=validate.Length(max=255))
+    user_id = fields.Int(required=True)
+    product_id = fields.Int(required=True)
+
+class Meta:
+    fields = ("id", "rating", "comment", "date", "user", "products")
+
+
+review_schema = ReviewSchema()
+reviews_schema = ReviewSchema(many=True)
