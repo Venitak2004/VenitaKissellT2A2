@@ -1,17 +1,18 @@
 from init import db, ma
 from marshmallow import validates, ValidationError, fields
 from marshmallow.validate import Regexp
-
+#validation categories for CATEGORY users must select one category for the products.
 VALID_CATEGORIES = ("Beauty", "Technology", "Toys", "Furniture", "Sport", "Household Goods", "Electrical", "Other")
 
 class Product(db.Model):
     __tablename__ = "products"
-
+    #Creating the products table column values
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     category = db.Column(db.String)
 
+    #Attaching the foreign key elements to the table
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     #define the relationship between user and products and reviews tables

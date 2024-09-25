@@ -6,7 +6,7 @@ from marshmallow.validate import Regexp
     #define the primary key for data serialisation
 class User(db.Model):
     __tablename__ = 'users'
-
+    #Creating the user table column values
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     display_name = db.Column(db.String)
@@ -21,10 +21,10 @@ class User(db.Model):
 #Create UserSchema to de/serialise objects
 class UserSchema(ma.Schema):
     
-    #creating the attributes specifics which interact with other models
+    #creating the attribute specifics which interact with other models
     products = fields.List(fields.Nested('ProductSchema', exclude=["user"]))
     reviews = fields.List(fields.Nested('ReviewSchema', exclude=["user"]))
-
+    #advises user of the valid email format
     email = fields.String(required=True, validate=Regexp("^\S+@\S+\.\S+$", error="Invalid Email Format, must be in proper email format."))
     
     class Meta:

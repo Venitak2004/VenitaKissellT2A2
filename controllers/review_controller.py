@@ -39,7 +39,7 @@ def add_review(product_id):
 @jwt_required()
 def delete_review(product_id, review_id):
     # Retrieve the comment and the product id from the database where id=review_id, and equals product_id
-    stmt = db.select(Review).filter_by(id=review_id)
+    stmt = db.select(Review).filter_by(id=review_id, id=product_id)
     review = db.session.scalar(stmt)
     # if exists:
     if review:
@@ -64,7 +64,7 @@ def update_review(product_id, review_id):
     stmt = db.select(Review).filter_by(id=review_id)
     review = db.session.scalar(stmt)
     
-    if review: #if there is a review, thn update the review 
+    if review: #if there is a review, then update the review 
         review.comment = request_body_data.get("comment") or review.comment
         # commit the changes to the database
         db.session.commit()

@@ -67,7 +67,9 @@ def update_user():
     # get the fields from the body of the request
     request_body_data = UserSchema().load(request.get_json(), partial=True)
 
-    password = request_body_data.get("password")
+    request_password = request_body_data.get("password")
+    request_name = request_body_data.get("name")
+    #Update user and or password fields if user is updating
     # GET the user from where it is stored in the database
     # SELECT * FROM user WHERE id= get_jwt_identity()
     stmt = db.select(User).filter_by(id=get_jwt_identity())
@@ -75,9 +77,9 @@ def update_user():
     # if there is a relevant user in the database GET it and return to user
     if user:
         # then update the fields as required by the user
-        user.name = request_body_data.get("name") or user.name
-        if password:
-            user.password = bcrypt.generate_password_hash(password).decode("utf-8")
+        user.name = request_name or user.name
+        if request_password:
+            user.password = bcrypt.generate_password_hash(request_password).decode("utf-8")
         # commit the changes to the database
         db.session.commit()
         # return a response to the logged in user
@@ -87,7 +89,7 @@ def update_user():
         # return an error response
         return {"error": "User does not exist."}
     
- # Create delete user so you can delte a specific user based on supplied user_id
+# Create delete user so you can delte a specific user based on supplied user_id
 @auth_bp.route("/<int:user_id>", methods=["DELETE"])
 # JSON web token is required as a bearer token and check for is_authorised to use the endpoint
 @jwt_required()

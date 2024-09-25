@@ -18,7 +18,7 @@ def get_all_products():
         return products_schema.dump(products), 200
     else:
         #return to user error message 400 Products not found
-        return {"error": f"There were not products in the database"}, 400
+        return {"error": f"There were no products in the database"}, 400
 
 #Retrieve one specific product from the Database
 @product_bp.route("/<int:product_id>")
@@ -79,7 +79,7 @@ def delete_product(product_id):
 
 
 #Make changes to an exisitng card - Authorised admin only
-@product_bp.route("/<int:card_id>", methods=["PUT", "PATCH"])
+@product_bp.route("/<int:product_id>", methods=["PUT", "PATCH"])
 @jwt_required()
 @auth_as_admin
 def update_product(product_id):
