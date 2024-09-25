@@ -5,12 +5,13 @@ from models.user import User, user_schema, UserSchema
 from init import db, bcrypt
 from sqlalchemy.exc import IntegrityError
 from psycopg2 import errorcodes
+from auth import auth_as_admin
 
 auth_bp = Blueprint('auth', __name__)
 
 #define the route to register users
 @auth_bp.route('/register', methods=['POST'])
-def register_user():
+def create_user():
     try:
         #GET the data from the body of the request
         request_body_data = UserSchema().load(request.get_json())
@@ -42,7 +43,7 @@ def register_user():
             return {"error": "Email address must be unique"}, 400
 
 @auth_bp.route('/login', methods=['POST'])
-def login():
+def login_user():
     #Get the data from the body of the request
     request_body_data = request.get_json()
 
@@ -85,3 +86,33 @@ def update_user():
     else:
         # return an error response
         return {"error": "User does not exist."}
+    
+ # Create delete user so you can delte a specific user based on supplied user_id
+@auth_bp.route("/<int:user_id>", methods=["DELETE"])
+# JSON web token is required as a bearer token and check for is_authorised to use the endpoint
+@jwt_required()
+@auth_as_admin
+def delete_user(user_id):
+    try:
+        # Retrieve the specific user from the database with supplied user_id
+        stmt = db.Select(User).filter_by(id=user_id)
+        user = db.session.scalar(stmt)
+
+        # check if there is such a user with the specific user_id:
+        if user:
+            # Delete the user if found and commit to the database session
+            db.session.delete(user)
+            db.session.commit()
+            
+            # Return a message to the that the user_id has been deleted and a success code 200
+            return{"message": f"User with user_id {user_id} has been successfully deleted."}, 200
+        
+        else:
+            # Return a message showing the user is not in the database
+            return{"error": f"User with user_id {user_id} has not been found."}, 404
+    
+    # Error handling to handle any unexpected errors that may occur
+    except Exception as e:
+        return{"error": "An unexpected error occurred", "details": str(e)}, 500
+
+
