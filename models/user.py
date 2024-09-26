@@ -1,5 +1,8 @@
+#import from the init.py file SQLAlchemy and Marshmallow
 from init import db, ma
+#import marshmallow module and fields
 from marshmallow import fields
+#import validate module and regexp
 from marshmallow.validate import Regexp
 
   #install the user table attributes

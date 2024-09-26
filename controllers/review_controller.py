@@ -1,9 +1,15 @@
+#import the datetime module and utilie date function to apply a time expiry 
 from datetime import date
+#import flask to utilise Blueprints and request function
 from flask import Blueprint, request
+#import jwt_extended to create user access tokens and retrievew user id's tokens
 from flask_jwt_extended import jwt_required, get_jwt_identity
+#import review model to to create object and serialising/deserialse with schemas
 from models.review import Review, review_schema, reviews_schema
-from marshmallow.exceptions import ValidationError
+#from marshmallow.exceptions import ValidationError
+#import product model module
 from models.product import Product
+#import from init.py SQLAlchemy
 from init import db
 
 review_bp = Blueprint('review', __name__)
@@ -39,7 +45,7 @@ def add_review(product_id):
 @jwt_required()
 def delete_review(product_id, review_id):
     # Retrieve the comment and the product id from the database where id=review_id, and equals product_id
-    stmt = db.select(Review).filter_by(id=review_id, id=product_id)
+    stmt = db.select(Review).filter_by(id=review_id)
     review = db.session.scalar(stmt)
     # if exists:
     if review:
@@ -52,6 +58,20 @@ def delete_review(product_id, review_id):
     else:
         #Else return error message, 404 Not found
         return {"error": f"Review with id {review_id} has not been found"}, 404
+
+#GET all products in the Database    
+@review_bp.route('/', methods=['GET'])
+def get_all_reviews(product_id):
+    stmt = db.Select(Review).filter_by(id=product_id)
+    reviews = db.session.scalars(stmt)
+    if reviews:
+        #If product id matches search, return from the database, 200 for successful 
+        return reviews_schema.dump(reviews), 200
+    else:
+        #return to user error message 400 Products not found
+        return {"error": f"There were no products in the database"}, 400
+
+
 
 
 # Update and exisiting review and update details

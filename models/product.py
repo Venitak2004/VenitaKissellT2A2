@@ -1,6 +1,12 @@
+#import from init.py SQLAlchemy & Marshmallow modules
 from init import db, ma
-from marshmallow import validates, ValidationError, fields
+#import Marshmallow and utilise, validates, validationErro and fields modules
+from marshmallow import validates, fields
+#import marshmallow.validate module and utilise Regexp function
 from marshmallow.validate import Regexp
+#from marshmallow import exceptions to utilse ValidationError function
+from marshmallow.exceptions import ValidationError
+
 #validation categories for CATEGORY users must select one category for the products.
 VALID_CATEGORIES = ("Beauty", "Technology", "Toys", "Furniture", "Sport", "Household Goods", "Electrical", "Other")
 

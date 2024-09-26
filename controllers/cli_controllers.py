@@ -1,6 +1,6 @@
-from models.user import User
+#from models.user import User
 from models.product import Product
-from models.review import Review
+#from models.review import Review
 
 
 from flask import Blueprint
@@ -17,12 +17,16 @@ def create_tables():
 
 #Set up the seed all tables with inserted information from user
 #@db_commands.cli.command("seed")
-##def seed_tables():
+#def seed_tables():
 #Create a list of User instances
- #   User(
- #
- #   )
- #print("Tables Seeded")
+#    Product({
+#       "name": "Giant Bike", 
+#       "description": "24inch Wheel Mountain bike.",
+#        "category": "Sports"
+#    }
+#    )
+
+#    print("Tables Seeded")
 
 #Set up the drop tables function
 

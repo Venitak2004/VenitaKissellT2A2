@@ -1,6 +1,10 @@
+#import from init.py SQLAlchemy & Marshmallow modules
 from init import db, ma
+#import datetime module to use date function
 from datetime import date
+#import marshmallow module and utilise fields function and validate function
 from marshmallow import fields, validate
+#import marshmallow validate function
 from marshmallow.validate import Regexp, OneOf
 
 class Review(db.Model):
@@ -34,7 +38,6 @@ class ReviewSchema(ma.Schema):
 
 class Meta:
     fields = ("id", "rating", "comment", "date", "user", "products")
-
 
 review_schema = ReviewSchema()
 reviews_schema = ReviewSchema(many=True)

@@ -1,7 +1,7 @@
 from datetime import timedelta
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-from models.user import User, user_schema, UserSchema
+from models.user import User, user_schema, users_schema, UserSchema
 from init import db, bcrypt
 from sqlalchemy.exc import IntegrityError
 from psycopg2 import errorcodes
@@ -28,12 +28,14 @@ def create_user():
         #Hash protect the password and store it with the user attribute  
         if password:
             user.password = bcrypt.generate_password_hash(password).decode('utf-8')
+       
         #Add and commit the session to the Database   
         db.session.add(user)
         db.session.commit()
 
         #return confirmation to the user
-        return user_schema({"message": "User registered successfully!"}), 201
+        return user_schema.dump(user)#"{"message": "User registered successfully!"}), 201
+   
     #except error handling - 400 Bad Request File Not Found
     except IntegrityError as err:
         if err.orig.pgcode == errorcodes.NOT_NULL_VIOLATION:
@@ -42,10 +44,14 @@ def create_user():
             # unique violation - 400 Bad Request File Not Found
             return {"error": "Email address must be unique"}, 400
 
+#create the login user route
 @auth_bp.route('/login', methods=['POST'])
 def login_user():
     #Get the data from the body of the request
     request_body_data = request.get_json()
+
+    #email_request = request_body_data.get_json("email")
+    #password_request = request_body_data.get_jason("password")
 
     #Search for the user with the specified user input from the front end
     stmt = db.select(User).filter_by(email=request_body_data.get("email"))
@@ -53,9 +59,9 @@ def login_user():
 
     if user and bcrypt.check_password_hash(user.password, request_body_data.get("password")):
         #Create the JWT security Token with a 15 minute validity timer
-        token = create_access_token(identity=str(user.id), expires_delta=timedelta(minutes=15))
+        token = create_access_token(identity=str(user.id), expires_delta=timedelta(days=1))
         #Return back to the user
-        return {"email": user.email, "is_admin": user.is_admin, "token": token}
+        return {"email": user.email, "is_admin": user.is_admin, "token": token},200
     else:
         #Reply back to user with an error message, 400 Bad Request File Not Found
         return {"error": "Invalid user, email or password is incorrect."}, 400
@@ -80,8 +86,10 @@ def update_user():
         user.name = request_name or user.name
         if request_password:
             user.password = bcrypt.generate_password_hash(request_password).decode("utf-8")
+        
         # commit the changes to the database
         db.session.commit()
+       # 
         # return a response to the logged in user
         return user_schema.dump(user)
     # else:

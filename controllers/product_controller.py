@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from models.product import Product, product_schema, products_schema
 from marshmallow.exceptions import ValidationError
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from controllers.review_controller import review_bp
+#from controllers.review_controller import review_bp
 from auth import auth_as_admin
 from init import db
 
@@ -21,7 +21,7 @@ def get_all_products():
         return {"error": f"There were no products in the database"}, 400
 
 #Retrieve one specific product from the Database
-@product_bp.route("/<int:product_id>")
+@product_bp.route("/<int:product_id>", methods=['GET'])
 def get_product(product_id):
     stmt = db.select(Product).filter_by(id=product_id)
     #Select the user input search for a specific product
@@ -34,7 +34,7 @@ def get_product(product_id):
 
 
 #Create a new product instance and add it into the Database
-@product_bp.route('/', methods=['POST'])
+@product_bp.route('/products', methods=['POST'])
 @jwt_required()
 def add_product():
     #Request the body data from the user input from the front end
