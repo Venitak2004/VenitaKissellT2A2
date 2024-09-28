@@ -7,15 +7,26 @@ from marshmallow.validate import Regexp
 #from marshmallow import exceptions to utilse ValidationError function
 from marshmallow.exceptions import ValidationError
 
+
 #validation categories for CATEGORY users must select one category for the products.
-VALID_CATEGORIES = ("Beauty", "Technology", "Toys", "Furniture", "Sport", "Household Goods", "Electrical", "Other")
+#VALID_CATEGORIES = ("Beauty", "Technology", "Toys", "Furniture", "Sport", "Household Goods", "Electrical", "Other")
+
+#@validates("category")
+#def validate_category(self, value):
+        # if trying to see if the category exists
+#        if value not in VALID_CATEGORIES:
+            # check whether an existing Category exists or not
+#            raise ValidationError(f"Invalid Category: {value}. Please choose one of the {VALID_CATEGORIES}.")
+       #The correct value is returned to the user
+#        return value
+
 
 class Product(db.Model):
     __tablename__ = "products"
     #Creating the products table column values
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String, nullable=False)
+    description = db.Column(db.String)
     category = db.Column(db.String)
 
     #Attaching the foreign key elements to the table
@@ -25,6 +36,7 @@ class Product(db.Model):
     user = db.relationship('User', back_populates='products')
     reviews = db.relationship('Review', back_populates='products')
 
+   
 
 class ProductSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=["id", "name", "email"])
@@ -35,17 +47,10 @@ class ProductSchema(ma.Schema):
 
     description = fields.String(required=True, validate=Regexp("[A-Z][A-Za-z0-9]+$"), error="Must be letters from the Alphabet or number 0-9.")
 
-    @validates("category")
-    def validate_category(self, value):
-        # if trying to see if the category exists
-        if value not in VALID_CATEGORIES:
-            # check whether an existing Category exists or not
-            raise ValidationError(f"Invalid Category: {value}. Please choose one of the {VALID_CATEGORIES}.")
-       #The correct value is returned to the user
-        return value
+ 
 
 class Meta:
-    fields = ("id", "name", "description", "category", "user", "reviews", )
+    fields = ("id", "name", "description", "category","user", "reviews" )
 
 product_schema = ProductSchema()
 products_schema = ProductSchema(many=True)

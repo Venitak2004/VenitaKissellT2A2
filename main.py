@@ -13,7 +13,7 @@ def create_app():
     
     #connecting to the database
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI")
-    app.config["JWT_SECRET_KEY"] = os.environ.get("SECRET_KEY")
+    app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
   
     #Initialise the file extensions from the init.py file
     db.init_app(app)

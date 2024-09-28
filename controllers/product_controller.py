@@ -1,17 +1,20 @@
 from flask import Blueprint, request, jsonify
-from models.product import Product, product_schema, products_schema
+
+from models.product import Product, ProductSchema, product_schema, products_schema
+from flask import Blueprint, request
 from marshmallow.exceptions import ValidationError
 from flask_jwt_extended import jwt_required, get_jwt_identity
 #from controllers.review_controller import review_bp
 from auth import auth_as_admin
 from init import db
 
-product_bp = Blueprint('product', __name__)
+
+product_bp = Blueprint('products', __name__,url_prefix="/products")
 
 #GET all products in the Database    
-@product_bp.route('/', methods=['GET'])
+@product_bp.route('/')
 def get_all_products():
-    stmt = db.Select(Product)
+    stmt = db.select(Product)
     products = db.session.scalars(stmt)
     if products:
         #If products to return from the database return to user 200 for successful 
@@ -22,10 +25,11 @@ def get_all_products():
 
 #Retrieve one specific product from the Database
 @product_bp.route("/<int:product_id>", methods=['GET'])
-def get_product(product_id):
+def get_a_product(product_id):
     stmt = db.select(Product).filter_by(id=product_id)
     #Select the user input search for a specific product
     product = db.session.scalar(stmt)
+    #if product exists return product
     if product:
         return product_schema.dump(product)
     else:
@@ -34,23 +38,25 @@ def get_product(product_id):
 
 
 #Create a new product instance and add it into the Database
-@product_bp.route('/products', methods=['POST'])
+@product_bp.route("/", methods=['POST'])
 @jwt_required()
 def add_product():
-    #Request the body data from the user input from the front end
-    request_body_data = product_schema.load(request.get.json())
     try:
+        #Request the body data from the user input from the front end
+        request_body_data = ProductSchema().load(request.get_json())
+    
         product = Product(
-        name = request_body_data.get('name'),
-        description = request_body_data.get('description'),
-        category = request_body_data.get('category'),
-        user_id = get_jwt_identity()
+            name = request_body_data.get('name'),
+            description = request_body_data.get('description'),
+            category = request_body_data.get('category'),
+            user_id = get_jwt_identity()
         )
         db.session.add(product)
         db.session.commit()
     
         #Return to the user success code 201   
         return product_schema.dump(product), 201
+    
     except ValidationError as err:
         return jsonify(err.messages), 400
     
@@ -81,7 +87,7 @@ def delete_product(product_id):
 #Make changes to an exisitng card - Authorised admin only
 @product_bp.route("/<int:product_id>", methods=["PUT", "PATCH"])
 @jwt_required()
-@auth_as_admin
+#@auth_as_admin
 def update_product(product_id):
     # Retrieve the data from the user body of the request
     request_body_data = product_schema.load(request.get_json(), partial=True)
@@ -98,7 +104,7 @@ def update_product(product_id):
         # update the fields as required
         product.name = request_body_data.get("name") or product.name
         product.description = request_body_data.get("description") or product.description
-        product.category = request_body_data.get("category") or product.category
+        #product.category = request_body_data.get("category") or product.category
       
         # commit to changes to the database
         db.session.commit()

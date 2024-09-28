@@ -1,5 +1,6 @@
 #from models.user import User
 from models.product import Product
+from models.user import User
 #from models.review import Review
 
 
@@ -19,13 +20,16 @@ def create_tables():
 #@db_commands.cli.command("seed")
 #def seed_tables():
 #Create a list of User instances
-#    Product({
-#       "name": "Giant Bike", 
-#       "description": "24inch Wheel Mountain bike.",
-#        "category": "Sports"
-#    }
-#    )
-
+#    products = [
+#        Product(
+#            name =  "Giant Bike", 
+#            description = "24inch Wheel Mountain bike.",
+#            category = "Sports",
+#            user_id = 1
+#        )
+#    ]
+#    db.session.add_all(products)
+#    db.session.commit()
 #    print("Tables Seeded")
 
 #Set up the drop tables function
