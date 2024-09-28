@@ -4,15 +4,16 @@ from models.product import Product, ProductSchema, product_schema, products_sche
 from flask import Blueprint, request
 from marshmallow.exceptions import ValidationError
 from flask_jwt_extended import jwt_required, get_jwt_identity
-#from controllers.review_controller import review_bp
+from controllers.review_controller import review_bp
 from auth import auth_as_admin
 from init import db
 
 
 product_bp = Blueprint('products', __name__,url_prefix="/products")
+product_bp.register_blueprint(review_bp)
 
 #GET all products in the Database    
-@product_bp.route('/')
+@product_bp.route("/")
 def get_all_products():
     stmt = db.select(Product)
     products = db.session.scalars(stmt)
@@ -43,14 +44,16 @@ def get_a_product(product_id):
 def add_product():
     try:
         #Request the body data from the user input from the front end
-        request_body_data = ProductSchema().load(request.get_json())
-    
+        request_body_data = product_schema.load(request.get_json())
+
+        #create the new product model instance
         product = Product(
             name = request_body_data.get('name'),
             description = request_body_data.get('description'),
             category = request_body_data.get('category'),
             user_id = get_jwt_identity()
         )
+        #add product and commit to the database
         db.session.add(product)
         db.session.commit()
     
@@ -84,7 +87,7 @@ def delete_product(product_id):
         return {"error": f"Product with product_id {product_id} has not been found"}, 404
 
 
-#Make changes to an exisitng card - Authorised admin only
+#Make changes to an exisitng product- Authorised admin only
 @product_bp.route("/<int:product_id>", methods=["PUT", "PATCH"])
 @jwt_required()
 #@auth_as_admin

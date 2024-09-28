@@ -26,9 +26,10 @@ class Review(db.Model):
    
 
 class ReviewSchema(ma.Schema):
-
+    #which user made the review
     user = fields.Nested("UserSchema", only=["name", "email"])
-    product = fields.Nested("CardSchema", exclude=["comments"])
+    #which product is the review about
+    product = fields.Nested("ProductSchema", exclude=["comments"])
     
     #this will ensure any data inserted will have to adhere to the listed specifications
     rating = fields.Int(required=True, validate=validate.Range(min=1, max=5))

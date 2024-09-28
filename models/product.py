@@ -1,58 +1,51 @@
-#import from init.py SQLAlchemy & Marshmallow modules
 from init import db, ma
-#import Marshmallow and utilise, validates, validationErro and fields modules
-from marshmallow import validates, fields
-#import marshmallow.validate module and utilise Regexp function
-from marshmallow.validate import Regexp
-#from marshmallow import exceptions to utilse ValidationError function
+from marshmallow import fields, validates
+from marshmallow.validate import Length, And, Regexp, OneOf
 from marshmallow.exceptions import ValidationError
 
-
-#validation categories for CATEGORY users must select one category for the products.
-#VALID_CATEGORIES = ("Beauty", "Technology", "Toys", "Furniture", "Sport", "Household Goods", "Electrical", "Other")
-
-#@validates("category")
-#def validate_category(self, value):
-        # if trying to see if the category exists
-#        if value not in VALID_CATEGORIES:
-            # check whether an existing Category exists or not
-#            raise ValidationError(f"Invalid Category: {value}. Please choose one of the {VALID_CATEGORIES}.")
-       #The correct value is returned to the user
-#        return value
+VALID_STATUSES = ("Beauty", "Technology", "Toys", "Furniture", "Sport", "Household Goods", "Ecectrical", "Other")
 
 
 class Product(db.Model):
     __tablename__ = "products"
-    #Creating the products table column values
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
     category = db.Column(db.String)
 
-    #Attaching the foreign key elements to the table
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    
-    #define the relationship between user and products and reviews tables
-    user = db.relationship('User', back_populates='products')
-    reviews = db.relationship('Review', back_populates='products')
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
 
-   
+    user = db.relationship('User', back_populates='products')
+    reviews = db.relationship('Review', back_populates='products', cascade="all, delete")
+
 
 class ProductSchema(ma.Schema):
+    
     user = fields.Nested('UserSchema', only=["id", "name", "email"])
     reviews = fields.List(fields.Nested('ReviewSchema', exclude=['product']))
 
-    #Validating user input - error message if not using alpabetical or numeric symbols
-    name = fields.String(required=True, validate=Regexp("[A-Z][A-Za-z0-9]+$"), error="Must be letters from the Alphabet or number 0-9.")
+    name = fields.String(required=True, validate=And(Length(min=1, error="Title must be at least 4 characters in length."), Regexp("^[A-Z][A-Za-z0-9 ]+$", error="Title must start with a capital letter and have alphanumeric characters only.")))
+    #select one from the valid statuses selection
+    category = fields.String(validate=OneOf(VALID_STATUSES))
 
-    description = fields.String(required=True, validate=Regexp("[A-Z][A-Za-z0-9]+$"), error="Must be letters from the Alphabet or number 0-9.")
-
- 
-
-class Meta:
-    fields = ("id", "name", "description", "category","user", "reviews" )
+    @validates("category")
+    def validate_category(self, value):
+        # if trying to see the value of category
+        for category in value:
+        # if value == VALID_STATUSES[1]:
+            # check whether an existing category exists or not
+            # SELECT COUNT(*) FROM table_name WHERE category="VALID_STATUSES"
+            stmt = db.select(db.func.count()).select_from(Product).filter_by(category=category)
+            count = db.session.scalar(stmt)
+            # if it exists
+            if count > 0:
+                # send error message
+                raise ValidationError(f"You already have a Product in the Category {category}.")
+                          
+    class Meta:
+        fields = ("id", "name", "description", "category", "users", "reviews")
+        ordered = True
 
 product_schema = ProductSchema()
 products_schema = ProductSchema(many=True)
-
-            

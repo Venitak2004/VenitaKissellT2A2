@@ -12,9 +12,9 @@ from models.product import Product
 #import from init.py SQLAlchemy
 from init import db
 
-review_bp = Blueprint('review', __name__)
+review_bp = Blueprint('review', __name__, url_prefix="/<int:product_id>/review")
 
-@review_bp.route('/reviews', methods=['POST'])
+@review_bp.route('/', methods=['POST'])
 @jwt_required
 def add_review(product_id):
    # get the user review from the request body
@@ -83,7 +83,7 @@ def update_review(product_id, review_id):
     # find the review with id that matches id = review_id
     stmt = db.select(Review).filter_by(id=review_id)
     review = db.session.scalar(stmt)
-    
+    #If the review exists
     if review: #if there is a review, then update the review 
         review.comment = request_body_data.get("comment") or review.comment
         # commit the changes to the database
