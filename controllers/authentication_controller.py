@@ -97,7 +97,7 @@ def update_user():
     
         #create the user object to get the user data input
         request_password = request_body_data.get("password")
-        request_name = request_body_data.get("name")
+        request_name = request_body_data.get("username")
         #Update user and or password fields if user is updating
         # GET the user from where it is stored in the database
         # SELECT * FROM user WHERE id= get_jwt_identity()

@@ -3,7 +3,7 @@ from marshmallow import fields, validates
 from marshmallow.validate import Length, And, Regexp, OneOf
 from marshmallow.exceptions import ValidationError
 
-VALID_STATUSES = ("Beauty", "Technology", "Toys", "Furniture", "Sport", "Household Goods", "Ecectrical", "Other")
+VALID_STATUSES = ("Beauty", "Technology", "Toys", "Furniture", "Sport", "Household Goods", "Electrical", "Other")
 
 
 class Product(db.Model):
@@ -14,15 +14,15 @@ class Product(db.Model):
     description = db.Column(db.String)
     category = db.Column(db.String)
 
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     user = db.relationship('User', back_populates='products')
-    reviews = db.relationship('Review', back_populates='products', cascade="all, delete")
+    reviews = db.relationship('Review', back_populates='product', cascade="all, delete")
 
 
 class ProductSchema(ma.Schema):
     
-    user = fields.Nested('UserSchema', only=["id", "name", "email"])
+    user = fields.Nested('UserSchema', only=["username", "email", "comment"])
     reviews = fields.List(fields.Nested('ReviewSchema', exclude=['product']))
 
     name = fields.String(required=True, validate=And(Length(min=1, error="Title must be at least 4 characters in length."), Regexp("^[A-Z][A-Za-z0-9 ]+$", error="Title must start with a capital letter and have alphanumeric characters only.")))
@@ -33,9 +33,9 @@ class ProductSchema(ma.Schema):
     def validate_category(self, value):
         # if trying to see the value of category
         for category in value:
-        # if value == VALID_STATUSES[1]:
+            #if value == VALID_STATUSES[1]:
             # check whether an existing category exists or not
-            # SELECT COUNT(*) FROM table_name WHERE category="VALID_STATUSES"
+            #SELECT COUNT(*) FROM table_name WHERE category="VALID_STATUSES"
             stmt = db.select(db.func.count()).select_from(Product).filter_by(category=category)
             count = db.session.scalar(stmt)
             # if it exists
@@ -44,7 +44,7 @@ class ProductSchema(ma.Schema):
                 raise ValidationError(f"You already have a Product in the Category {category}.")
                           
     class Meta:
-        fields = ("id", "name", "description", "category", "users", "reviews")
+        fields = ("id", "name", "description", "category", "users", "email", "reviews", "comment")
         ordered = True
 
 product_schema = ProductSchema()

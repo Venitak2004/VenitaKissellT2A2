@@ -1,13 +1,12 @@
 from flask import Blueprint, request, jsonify
 
-from models.product import Product, ProductSchema, product_schema, products_schema
+from models.product import Product, product_schema, products_schema
 from flask import Blueprint, request
 from marshmallow.exceptions import ValidationError
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from controllers.review_controller import review_bp
 from auth import auth_as_admin
 from init import db
-
 
 product_bp = Blueprint('products', __name__,url_prefix="/products")
 product_bp.register_blueprint(review_bp)
@@ -17,12 +16,8 @@ product_bp.register_blueprint(review_bp)
 def get_all_products():
     stmt = db.select(Product)
     products = db.session.scalars(stmt)
-    if products:
-        #If products to return from the database return to user 200 for successful 
-        return products_schema.dump(products), 200
-    else:
-        #return to user error message 400 Products not found
-        return {"error": f"There were no products in the database"}, 400
+    #If products to return from the database return to user 200 for successful 
+    return products_schema.dump(products), 200
 
 #Retrieve one specific product from the Database
 @product_bp.route("/<int:product_id>", methods=['GET'])
@@ -45,6 +40,7 @@ def add_product():
     try:
         #Request the body data from the user input from the front end
         request_body_data = product_schema.load(request.get_json())
+        
 
         #create the new product model instance
         product = Product(

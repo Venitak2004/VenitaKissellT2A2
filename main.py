@@ -10,7 +10,8 @@ from controllers.cli_controllers import db_commands
 def create_app():
 
     app = Flask(__name__)
-    
+    #overrides flask sort function, to do marshmallow sort
+    app.json.sort_keys = False
     #connecting to the database
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI")
     app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")

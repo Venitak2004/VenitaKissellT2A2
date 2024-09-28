@@ -11,7 +11,7 @@ class User(db.Model):
     __tablename__ = 'users'
     #Creating the user table column values
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
+    username = db.Column(db.String(100), nullable=False)
     display_name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String(128), nullable=False)
@@ -29,9 +29,10 @@ class UserSchema(ma.Schema):
     reviews = fields.List(fields.Nested('ReviewSchema', exclude=["user"]))
     #advises user of the valid email format
     email = fields.String(required=True, validate=Regexp("^\S+@\S+\.\S+$", error="Invalid Email Format, must be in proper email format."))
-    
+    username = fields.String(required=True)
+    display_name = fields.String(required=True)
     class Meta:
-        fields = ("id", "username", "display_name", "email", "password", "is_admin", "products", "reviews")
+        fields = ("id", "username", "display_name", "email", "password", "is_admin", "products", "reviews", "comment")
 
 # to handle a single user object
 user_schema = UserSchema(exclude=["password"])
