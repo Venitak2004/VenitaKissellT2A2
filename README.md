@@ -1,21 +1,34 @@
 Table of Contents
 
 [R1. Explain the problem that this app will solve and explain how this app solves or addresses the problem.](#r1)
+
 [R2. Describe the way tasks are allocated and tracked in your project.](#r2)
+
 [R3. List and explain the third-party services, packages and dependencies used in this app.](#r3)
+
 [R4. Explain the benefits and drawbacks of this app’s underlying database system.](#r4)
+
 [R5.  Explain the features, purpose and functionalities of the object-relational mapping system (ORM) used in this app.](#r5)
+
 [R6. Design an entity relationship diagram (ERD) for this app’s database and explain how the relations between the diagramed models will aid the database design. 
 This should focus on the database design BEFORE coding has begun, eg. during the project planning or design phase. ](#r6)
-[R7. Explain the implemented models and their relationships, including how the relationships aid the database implementation.
+
+[R7. Explain the implemented models and their relationships, including how the relationships aid the database implementation. This should focus on the database implementation AFTER coding has begun, eg. during the project development phase.](#r7)
+
 [User Model](#user)
+
 [Product Model](#product)
+
 [Review Model](#review)
-This should focus on the database implementation AFTER coding has begun, eg. during the project development phase.](#r7)
+
 [R8. Explain how to use this application’s API endpoints. Each endpoint should be explained, including the following data for each endpoint:](#r8)
+
 [User Controller](#user_controller)
+
 [Product Controller](#produduct_controller)
+
 [Review Controller](#review_controller)
+
 [References](#references)
 
 ## R1
@@ -28,7 +41,7 @@ Lack of Personalisation – Reviews that don’t tailor to customers’ needs an
 Difficulty Comparing Products – Consumers struggle to compare the features, prices and user experiences, as again consumers are unsure of trustworthy reviews.
 
 This app solves the problem of legitimacy, as it is an independent app where people can post their honest reviews, good bad or indifferent, it can be customized into categories. This app will incorporate customer reviews and/or buying guidelines to enhance the credibility of the product being reviewed, whereby helping consumers make more informed decisions. It will foster a community of users who can ask questions, share their experiences, and provide real-time feedback, creating a more interactive environment.
- 
+![Stats-image](./docs/stats.PNG)
 According to surveys, about 84% of consumers trust online review as much as personal recommendations. This highlights the significance of reviews in consumers decision making. 90% of consumers write reviews to help others make good decisions. Research indicates that 70% of consumers advise they research a product before making a purchase and read on average 7 reviews before trusting a product.  Products with positive reviews can increase sales but up to 18% while a negative review can deter around 22% of potential consumers. While 12% in brand advocacy results in an increase of two times in revenue.
 With the introduction of iPhones, mobile phone shopping is accounted for more than 50% of consumers purchases, with a strong lean to those looking at product reviews while in store before purchasing. 
 
