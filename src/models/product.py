@@ -24,7 +24,7 @@ class ProductSchema(ma.Schema):
     
     user = fields.Nested('UserSchema', only=["username", "email", "comment"])
     reviews = fields.List(fields.Nested('ReviewSchema', exclude=['product']))
-
+    description = fields.String(required=True)
     name = fields.String(required=True, validate=And(Length(min=1, error="Title must be at least 4 characters in length."), Regexp("^[A-Z][A-Za-z0-9 ]+$", error="Title must start with a capital letter and have alphanumeric characters only.")))
     #select one from the valid statuses selection
     category = fields.String(validate=OneOf(VALID_STATUSES))
@@ -43,7 +43,7 @@ class ProductSchema(ma.Schema):
                 # send error message
                 raise ValidationError(f"You already have a Product in the Category {category}.")
                           
-    class Meta:
+class Meta:
         fields = ("id", "name", "description", "category", "users", "email", "reviews", "comment")
         ordered = True
 

@@ -31,13 +31,16 @@ class ReviewSchema(ma.Schema):
     product = fields.Nested("ProductSchema", exclude=["reviews"])
     
     #this will ensure any data inserted will have to adhere to the listed specifications
+    id = fields.Int(required=True)
     rating = fields.Int(required=True, validate=validate.Range(min=1, max=5))
     comment = fields.Str(required=True, validate=validate.Length(max=255))
     user_id = fields.Int(required=True)
     product_id = fields.Int(required=True)
 
 class Meta:
-    fields = ("id", "rating", "comment", "date", "user","products")
+    fields = ("id", "rating", "comment", "date", "user","product")
+    ordered = True
+    
 
 review_schema = ReviewSchema()
 reviews_schema = ReviewSchema(many=True)

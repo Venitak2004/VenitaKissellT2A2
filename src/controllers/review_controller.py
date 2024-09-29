@@ -6,6 +6,7 @@ from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 #import review model to to create object and serialising/deserialse with schemas
 from models.review import Review, review_schema, reviews_schema
+from init import db
 #import product model module
 from models.product import Product
 #auth_as_admin imported module from auth.py for authentication
@@ -48,10 +49,11 @@ def add_review(product_id):
 @review_bp.route("/<int:review_id>", methods=["DELETE"])
 @jwt_required()
 @auth_as_admin
-def delete_review(review_id):
+def delete_review(product_id, review_id):
     try:
         # Retrieve the review_id from the database where id=review_id matches user input
         stmt = db.select(Review).filter_by(id=review_id)
+        #Retrieves the review from the database
         review = db.session.scalar(stmt)
         # if review exists in the database:
         if review:
@@ -69,9 +71,9 @@ def delete_review(review_id):
     except Exception as e:
         return{"error": "Unexpected Error", "details": str(e)}, 500
 
-#GET all products in the Database    
+#GET a review in the database for a specific product 
 @review_bp.route('/', methods=['GET'])
-def get_a_reviews(product_id):
+def get_a_review(product_id):
     stmt = db.select(Review).filter_by(id=product_id)
     reviews = db.session.scalars(stmt).all()
     if reviews:
@@ -105,17 +107,3 @@ def update_review(product_id, review_id):
         # Else return error message, 404 Not Found
         return {"error": f"Review with review_id {review_id} has not been found."}, 404
     
-
-    #GET all products in the Database    
-@review_bp.route("/", methods=["GET"])
-def get_all_reviews():
-    stmt = db.select(Review)
-    reviews = db.session.scalars(stmt).all()
-    if reviews:
-        #If product id matches search, return from the database, 200 for successful 
-        return reviews_schema.dump(reviews), 200
-    else:
-        #return to user error message 400 Products not found
-        return {"error": f"There were no products in the database"}, 400
-
-

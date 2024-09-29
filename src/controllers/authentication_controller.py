@@ -174,7 +174,7 @@ def get_a_user(user_id):
         user = db.session.scalar(stmt)
 
         if user:
-            return user_schema.dump(user)
+            return user_schema.dump(user), 200
         else:
             return {"error": "No users to view"}
     except Exception as e:

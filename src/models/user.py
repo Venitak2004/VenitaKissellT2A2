@@ -33,7 +33,7 @@ class UserSchema(ma.Schema):
     display_name = fields.String(required=True)
     class Meta:
         fields = ("id", "username", "display_name", "email", "password", "is_admin", "products", "reviews", "comment")
-
+        ordered = True
 # to handle a single user object
 user_schema = UserSchema(exclude=["password"])
 
