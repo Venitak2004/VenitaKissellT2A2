@@ -52,7 +52,7 @@ This emphasises the need for accessible review platforms. These statistics illus
 Task Creation and Allocation
 Tasks are defined and loaded into Trello, where each task is allocated a status indicator, (Started, In Progress, Completed) that gets updated as each task is worked on to update the project management progress.
  
-
+![Trello_image](./docs/Trello_project_db.PNG)
 
 I utilise the dashboard for the task status to track progress, completions, deadlines. This visualisation of tasks helps me quickly assess where I am up to with the project and what needs to be addressed next. This structured approach helps maintain clarity and efficiency in managing all the tasks associated with project managing an API project and helps to effectively meet the goals with Trello’s tracking methods
 
@@ -76,6 +76,7 @@ GitHub
 
 Github was used to track all changes to the webserver project which allowed recovery of data from previous commits if necessary. Each file was updated and committed with a git init, git status, git add ., git commit -m”meaningful message”, and git push origin main.
 
+![GitHub-image](./docs/gitHub.PNG)
  
 ## R3
 
@@ -94,7 +95,7 @@ Bcrypt
 pip3 install flask_bcrypt
 
 Bcrypt is utilised for secure password hashing to protect valuable information. It is a lightweight WSGI web application framework for Python. It serves as the foundation for building the web app by handling the routing, requests and responses and is an extension for Flask. Bcrypt enables secure password storage by hashing passwords with the bcrypt algorithm making them resistant to brute force cyber-attacks. It also allows the developer to assign user management by defining user models that include hashed passwords.
- 
+![bcrypt-image](./docs/bcrypt.PNG) 
 
 JWT Extended
 
@@ -104,7 +105,9 @@ Is one of the ways you can implement security with a token-based authentication 
 Header – This stores the token encryption algorithm
 Payload – This contains the data identifiers for the user like ID or username
 Signature – This is the digital signature which is generated with the Header and Payload to verify the content.
- 
+
+![JWT_Extended-image](./docs/jwt_extended.PNG)
+
 SQLAlchemy
 
 pip3 install flask_sqlalchemy
@@ -114,7 +117,8 @@ For Python SQLAlchemy is a flexible, powerful toolkit for ORM. It is designed fo
 You use Column to define your database columns. The name that you assign to your column becomes the column name. It utilises the table relationships with ONE-TO-ONE, ONE-TO-MANY, and MANY-TO-MANY relationships.
 
 Is not just an adapter but a more like a comprehensive toolkit for ORM systems and Python applications. Its complexities for database communications allows developers to engage and interact with the database using Python expressions. SQLAlchemy enables you to map python objects to database tables. It automatically translates Python expressions into SQL code reducing the need for writing SQL queries.
- 
+
+![SQLAlchemy_code_image](./docs/SQL.PNG) 
 
 Psycopg2-binary
 
@@ -128,7 +132,9 @@ pip3 install flask_marshmallow
 pip3 install marshmallow_sqlalchemy
 
 This application has been used to create schemas to help to seralise and deserialise objects in python into readable objects for the viewing panel. It is used inside the model for validating user input and nested attributes, also used fields, and validate 
- 
+
+![Marshmallow-image](./docs/Marshmallow_SQL.PNG)
+
 Dot-env
 Is a Python Flask extension that loads and environment variable from a .env file, it manages sensitive configurations securely, for example database URL’s and secret keys. It helps with modularization and separates the application logic from the configuration data.
 
@@ -141,12 +147,15 @@ Flask is a standard Python web structure that is used to craft RESTful APIs for 
 Below are some of the examples of using Flask.
 
 1.	Data Retrieval: Flask can be used to construct APIs to retrieve data from databases, files or external API’s.  See example below; When you access the http address in your browser it will retrieve data from the PostgreSQL database and return it as a JSON response.
-  
+
+![Get_All-image](./docs/Products_GET_All.PNG)
+![Get_Data-image](./docs/psycopg2.PNG) 
+
 Data Transformation: Flask can be utilised to construct API’s to perform data calculations. Here is an example that calculates the sum of two numbers.
- 
+ ![Flask-image](./docs/flask.PNG)  
 
 2.	Data Ingestion: Flask can be used to construct API’s that accept data uploads or input data from external sources. Example below of accepting a file upload and saves to the server.
- 
+![Flask-image](./docs/flask_import.PNG)
 
 These are just a few examples of the ways in which Flask can be used in data engineering tasks
 
@@ -199,7 +208,7 @@ The primary purpose of the ORM system in the product review app is to streamline
 By incorporating an ORM system the product review app can efficiently manage the data, streamline development processes and ensure that the application is scalable and maintainable, some of ORM’s functionalities below.
 
 -	CRUD operations like CREATE, READ, UPDATE, DELETE through object manipulation.
- 
+ ![CRUD-image](./docs/CRUD.PNG)
 
 -	Data Validation which provides built in validation features to ensure data integrity.
 -	Supports complex queries for filtering through object-oriented interfaces to allow developers to retrieve data efficiently.
@@ -207,13 +216,14 @@ By incorporating an ORM system the product review app can efficiently manage the
 -	Easy database schema migrations, make managing changes in the database structure easier over time.
 -	Offers a multi database system support, allowing the app to switch databases with minimal code changes. 
  
+ ![imports-image](./docs/imports.PNG)
 
  
 ## R6
 
  
 An Entity Relationship diagram is a visual representation of the entities in a database system and their relationships to one another. For the product review app, the ER diagram typically includes entities such as Users, Products, Reviews and Categories. Below is the breakdown of each entity table.
-
+![ER_Diagram-image](./docs/ER_Diagram.PNG)
 Users
 This entity represents the users of the app, storing their details, and passwords safely (hashed). Each user can submit multiple reviews.
 -	UserID (Primary Key) and not null
@@ -267,66 +277,87 @@ Flexibility for filtering reviews by the user or product enables better searchin
 Normalisation helps minimise data redundancy and improves the datas’ integrity. User information is stored once, and reviews do not need to be duplicated. By separating User, Product, and Review models/entities, the implementation adheres to normalization principles, reducing the redundancy
 During the project development phase, implementing User, Product and Review entities with their respective relationships establishes a robust database structure. This design aids in efficient data handling, and prepares for future enhancements, ensuring long term scalability and maintainability. The clearly defined interconnections in the entities, ensures development teams can focus on building features that will leverage the structured data efficiently.
 
-User Model 
+### User Model 
+ 
+![User_model-image](./docs/user_model.PNG)
+
+#### User Controllers – Authentication_Controller
+##### Create User
+
+![User-create-image](./docs/user_controller_create.PNG)
  
 
-User Controllers – Authentication_Controller
-Create User
- 
+#### User Controllers – Authentication_Controller
+##### Login_user
+
+![User-login-image](./docs/user_controller_login.PNG) 
  
 
-User Controllers – Authentication_Controller
-Login_user
- 
- 
+#### User Controllers – Authentication_Controller
+##### Update_user
 
-User Controllers – Authentication_Controller
-Update_user
- 
+![User-update-image](./docs/user_controller_update.PNG) 
 
-User Controllers – Authentication_Controller
-Delete_user
- 
+#### User Controllers – Authentication_Controller
+##### Delete_user
 
-User Controllers – Authentication_Controller
-
- 
-
- 
-
-Product Model
-
- 
- 
-
-Product Controllers – Get all products, Get a Product(<product_id> 
- 
-
-Product Controllers – Add a Product, Delete a Product 
- 
-
-Product Controllers – Update Product
+![User-delete-image](./docs/user_controller_delete.PNG) 
  
 
+ #### User Controllers – Authentication_Controller
+##### Get_user
+
+![User-get-image](./docs/user_controller_get_user.PNG) 
+
  
 
-Review Model
+#### Product Model
+#### User Controllers – Authentication_Controller
+##### Delete_user
+
+![Product_model-image](./docs/product_model.PNG) 
 
  
  
 
-Review_Controllers – Add Review
- 
+#### Product Controllers
+##### Get all products, Get a Product(<product_id>)
+
+![Product_Get_All-image](./docs/product_controller_get_all.PNG)  
+
+#### Product Controllers
+##### Add a Product, Delete a Product 
+
+![Product_Add_Delete-image](./docs/product_controller_add_delete.PNG)  
+
+#### Product Controllers
+##### Update Product
+
+![Product_Update-image](./docs/product_controller_update.PNG)   
+
  
 
-Review_Controller – Delete Review
+#### Review Model
 
- 
+ ![Review_Model-image](./docs/review_model.PNG)  
+ 
+
+#### Review_Controllers
+##### Add Review
+![Review_Add-image](./docs/review_controller_add.PNG)  
+ 
+
+#### Review_Controller
+##### Delete Review
+
+ ![Review_Delete-image](./docs/review_controller_delete.PNG)
 
  
 
-Review_Controller – Get_a_Review, Update_Review
+#### Review_Controller
+##### Get_a_Review, Update_Review
 
+![Review_GET_UPdate-image](./docs/review_controller_get_update.PNG)
 
  
  
@@ -336,11 +367,16 @@ Review_Controller – Get_a_Review, Update_Review
 The product model is set up with specific attributes for the tables, and the controller actions these from the front end user input. Id is autogenerated, username can not be null, display_name can not be null, email can not be null, and password can not be null.
 
 #### CREATE a User 
- 
+
+
+![User-create-image](./docs/user_model_create.PNG)
+![User-create-image](./docs/user_controller_create.PNG) 
+
 HTTP Verb – methods=[‘POST’]
 Path or Route: http://localhost:8000/auth/register 
 
 Required body/header –username, email, display_name, password 
+
 
  
 Response – 
