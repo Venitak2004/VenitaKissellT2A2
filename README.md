@@ -286,30 +286,30 @@ During the project development phase, implementing User, Product and Review enti
 #### User Controllers – Authentication_Controller
 ##### Create User
 
-![User-create-image](./docs/user_controller_create.PNG)
+![User-create-image](./docs/user_controller_create.png)
  
 
 #### User Controllers – Authentication_Controller
 ##### Login_user
 
-![User-login-image](./docs/user_controller_login.PNG) 
+![User-login-image](./docs/user_controller_login.png) 
  
 
 #### User Controllers – Authentication_Controller
 ##### Update_user
 
-![User-update-image](./docs/user_controller_update.PNG) 
+![User-update-image](./docs/user_controller_update.png) 
 
 #### User Controllers – Authentication_Controller
 ##### Delete_user
 
-![User-delete-image](./docs/user_controller_delete.PNG) 
+![User-delete-image](./docs/user_controller_delete.png) 
  
 
  #### User Controllers – Authentication_Controller
 ##### Get_user
 
-![User-get-image](./docs/user_controller_get_user.PNG) 
+![User-get-image](./docs/user_controller_get_user.png) 
 
  
 
@@ -317,7 +317,7 @@ During the project development phase, implementing User, Product and Review enti
 #### User Controllers – Authentication_Controller
 ##### Delete_user
 
-![Product_model-image](./docs/product_model.PNG) 
+![Product_model-image](./docs/product_model.png) 
 
  
  
@@ -325,41 +325,41 @@ During the project development phase, implementing User, Product and Review enti
 #### Product Controllers
 ##### Get all products, Get a Product(<product_id>)
 
-![Product_Get_All-image](./docs/product_controller_get_all.PNG)  
+![Product_Get_All-image](./docs/product_controller_get_all.png)  
 
 #### Product Controllers
 ##### Add a Product, Delete a Product 
 
-![Product_Add_Delete-image](./docs/product_controller_add_delete.PNG)  
+![Product_Add_Delete-image](./docs/product_controller_add_delete.png)  
 
 #### Product Controllers
 ##### Update Product
 
-![Product_Update-image](./docs/product_controller_update.PNG)   
+![Product_Update-image](./docs/product_controller_update.png)   
 
  
 
 #### Review Model
 
- ![Review_Model-image](./docs/review_model.PNG)  
+ ![Review_Model-image](./docs/review_model.png)  
  
 
 #### Review_Controllers
 ##### Add Review
-![Review_Add-image](./docs/review_controller_add.PNG)  
+![Review_Add-image](./docs/review_controller_add.png)  
  
 
 #### Review_Controller
 ##### Delete Review
 
- ![Review_Delete-image](./docs/review_controller_delete.PNG)
+ ![Review_Delete-image](./docs/review_controller_delete.png)
 
  
 
 #### Review_Controller
 ##### Get_a_Review, Update_Review
 
-![Review_GET_UPdate-image](./docs/review_controller_get_update.PNG)
+![Review_GET_UPdate-image](./docs/review_controller_get_update.png)
 
  
  
