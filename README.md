@@ -374,15 +374,15 @@ The product model is set up with specific attributes for the tables, and the con
 #### CREATE a User 
 
 
-![User-create-image](./docs/user_model_create.PNG)
-![User-create-image](./docs/user_controller_create.PNG) 
+![User-create-image](./docs/user_model_create.png)
+![User-create-image](./docs/user_controller_create.png) 
 
 HTTP Verb – methods=[‘POST’]
 Path or Route: http://localhost:8000/auth/register 
 
 Required body/header –username, email, display_name, password 
 
-![User-create-image](./docs/User/Add-User.PNG)
+![User-create-image](./docs/User/Add-User.png)
  
 Response – 
     Success:201 Created 
@@ -400,7 +400,7 @@ Required body/header – email, password, jwt token is then retrieved.
 
 Response –
     Success: 200 Ok 
- ![User-login-image](./docs/User/User_Login.PNG)  
+ ![User-login-image](./docs/User/User_Login.png)  
  
     Error: “Invalid user, email or password is incorrect.” 401 Unauthorised.
   ![User-login-image](./docs/User/User_login-%20Error_message.png) 
