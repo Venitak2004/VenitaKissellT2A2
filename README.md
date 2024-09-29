@@ -41,7 +41,9 @@ Lack of Personalisation – Reviews that don’t tailor to customers’ needs an
 Difficulty Comparing Products – Consumers struggle to compare the features, prices and user experiences, as again consumers are unsure of trustworthy reviews.
 
 This app solves the problem of legitimacy, as it is an independent app where people can post their honest reviews, good bad or indifferent, it can be customized into categories. This app will incorporate customer reviews and/or buying guidelines to enhance the credibility of the product being reviewed, whereby helping consumers make more informed decisions. It will foster a community of users who can ask questions, share their experiences, and provide real-time feedback, creating a more interactive environment.
-![Stats-image](./docs/stats.PNG)
+
+![Stats-image](./docs/stats.png
+
 According to surveys, about 84% of consumers trust online review as much as personal recommendations. This highlights the significance of reviews in consumers decision making. 90% of consumers write reviews to help others make good decisions. Research indicates that 70% of consumers advise they research a product before making a purchase and read on average 7 reviews before trusting a product.  Products with positive reviews can increase sales but up to 18% while a negative review can deter around 22% of potential consumers. While 12% in brand advocacy results in an increase of two times in revenue.
 With the introduction of iPhones, mobile phone shopping is accounted for more than 50% of consumers purchases, with a strong lean to those looking at product reviews while in store before purchasing. 
 
@@ -52,7 +54,7 @@ This emphasises the need for accessible review platforms. These statistics illus
 Task Creation and Allocation
 Tasks are defined and loaded into Trello, where each task is allocated a status indicator, (Started, In Progress, Completed) that gets updated as each task is worked on to update the project management progress.
  
-![Trello_image](./docs/Trello_project_db.PNG)
+![Trello_image](./docs/Trello_project_db.png)
 
 I utilise the dashboard for the task status to track progress, completions, deadlines. This visualisation of tasks helps me quickly assess where I am up to with the project and what needs to be addressed next. This structured approach helps maintain clarity and efficiency in managing all the tasks associated with project managing an API project and helps to effectively meet the goals with Trello’s tracking methods
 
@@ -76,7 +78,7 @@ GitHub
 
 Github was used to track all changes to the webserver project which allowed recovery of data from previous commits if necessary. Each file was updated and committed with a git init, git status, git add ., git commit -m”meaningful message”, and git push origin main.
 
-![GitHub-image](./docs/gitHub.PNG)
+![GitHub-image](./docs/gitHub.png)
  
 ## R3
 
@@ -95,7 +97,7 @@ Bcrypt
 pip3 install flask_bcrypt
 
 Bcrypt is utilised for secure password hashing to protect valuable information. It is a lightweight WSGI web application framework for Python. It serves as the foundation for building the web app by handling the routing, requests and responses and is an extension for Flask. Bcrypt enables secure password storage by hashing passwords with the bcrypt algorithm making them resistant to brute force cyber-attacks. It also allows the developer to assign user management by defining user models that include hashed passwords.
-![bcrypt-image](./docs/bcrypt.PNG) 
+![bcrypt-image](./docs/bcrypt.png) 
 
 JWT Extended
 
@@ -106,7 +108,7 @@ Header – This stores the token encryption algorithm
 Payload – This contains the data identifiers for the user like ID or username
 Signature – This is the digital signature which is generated with the Header and Payload to verify the content.
 
-![JWT_Extended-image](./docs/jwt_extended.PNG)
+![JWT_Extended-image](./docs/jwt_extended.png)
 
 SQLAlchemy
 
@@ -118,7 +120,7 @@ You use Column to define your database columns. The name that you assign to your
 
 Is not just an adapter but a more like a comprehensive toolkit for ORM systems and Python applications. Its complexities for database communications allows developers to engage and interact with the database using Python expressions. SQLAlchemy enables you to map python objects to database tables. It automatically translates Python expressions into SQL code reducing the need for writing SQL queries.
 
-![SQLAlchemy_code_image](./docs/SQL.PNG) 
+![SQLAlchemy_code_image](./docs/SQL.png) 
 
 Psycopg2-binary
 
@@ -133,7 +135,7 @@ pip3 install marshmallow_sqlalchemy
 
 This application has been used to create schemas to help to seralise and deserialise objects in python into readable objects for the viewing panel. It is used inside the model for validating user input and nested attributes, also used fields, and validate 
 
-![Marshmallow-image](./docs/Marshmallow_SQL.PNG)
+![Marshmallow-image](./docs/Marshmallow_SQL.png)
 
 Dot-env
 Is a Python Flask extension that loads and environment variable from a .env file, it manages sensitive configurations securely, for example database URL’s and secret keys. It helps with modularization and separates the application logic from the configuration data.
@@ -148,14 +150,14 @@ Below are some of the examples of using Flask.
 
 1.	Data Retrieval: Flask can be used to construct APIs to retrieve data from databases, files or external API’s.  See example below; When you access the http address in your browser it will retrieve data from the PostgreSQL database and return it as a JSON response.
 
-![Get_All-image](./docs/Products_GET_All.PNG)
-![Get_Data-image](./docs/psycopg2.PNG) 
+![Get_All-image](./docs/Products_GET_All.png)
+![Get_Data-image](./docs/psycopg2.png) 
 
 Data Transformation: Flask can be utilised to construct API’s to perform data calculations. Here is an example that calculates the sum of two numbers.
- ![Flask-image](./docs/flask.PNG)  
+ ![Flask-image](./docs/flask.png)  
 
 2.	Data Ingestion: Flask can be used to construct API’s that accept data uploads or input data from external sources. Example below of accepting a file upload and saves to the server.
-![Flask-image](./docs/flask_import.PNG)
+![Flask-image](./docs/flask_import.png)
 
 These are just a few examples of the ways in which Flask can be used in data engineering tasks
 
@@ -208,7 +210,7 @@ The primary purpose of the ORM system in the product review app is to streamline
 By incorporating an ORM system the product review app can efficiently manage the data, streamline development processes and ensure that the application is scalable and maintainable, some of ORM’s functionalities below.
 
 -	CRUD operations like CREATE, READ, UPDATE, DELETE through object manipulation.
- ![CRUD-image](./docs/CRUD.PNG)
+ ![CRUD-image](./docs/CRUD.png)
 
 -	Data Validation which provides built in validation features to ensure data integrity.
 -	Supports complex queries for filtering through object-oriented interfaces to allow developers to retrieve data efficiently.
@@ -216,14 +218,14 @@ By incorporating an ORM system the product review app can efficiently manage the
 -	Easy database schema migrations, make managing changes in the database structure easier over time.
 -	Offers a multi database system support, allowing the app to switch databases with minimal code changes. 
  
- ![imports-image](./docs/imports.PNG)
+ ![imports-image](./docs/imports.png)
 
  
 ## R6
 
  
 An Entity Relationship diagram is a visual representation of the entities in a database system and their relationships to one another. For the product review app, the ER diagram typically includes entities such as Users, Products, Reviews and Categories. Below is the breakdown of each entity table.
-![ER_Diagram-image](./docs/ER_Diagram.PNG)
+![ER_Diagram-image](./docs/ER_Diagram.png)
 Users
 This entity represents the users of the app, storing their details, and passwords safely (hashed). Each user can submit multiple reviews.
 -	UserID (Primary Key) and not null
@@ -279,7 +281,7 @@ During the project development phase, implementing User, Product and Review enti
 
 ### User Model 
  
-![User_model-image](./docs/user_model.PNG)
+![User_model-image](./docs/user_model.png)
 
 #### User Controllers – Authentication_Controller
 ##### Create User
@@ -366,6 +368,9 @@ During the project development phase, implementing User, Product and Review enti
 ### User Controller
 The product model is set up with specific attributes for the tables, and the controller actions these from the front end user input. Id is autogenerated, username can not be null, display_name can not be null, email can not be null, and password can not be null.
 
+![User_Controller-image](./docs/user_model.png)
+
+
 #### CREATE a User 
 
 
@@ -377,13 +382,13 @@ Path or Route: http://localhost:8000/auth/register
 
 Required body/header –username, email, display_name, password 
 
-![User-create-image](./docs/user/Add%20User.png.PNG)
+![User-create-image](./docs/User/Add-User.PNG)
  
 Response – 
     Success:201 Created 
 
 Error: “Email address is not unique” 400
- 
+ ![User-create-image](./docs/User/AddUser-Not_Unique_Error.PNG)
 
 
 
@@ -395,11 +400,13 @@ Required body/header – email, password, jwt token is then retrieved.
 
 Response –
     Success: 200 Ok 
+ ![User-login-image](./docs/User/User_Login.PNG)  
+ 
     Error: “Invalid user, email or password is incorrect.” 401 Unauthorised.
- 
-Error:”Token has expired” 401 Unauthorised
- 
+  ![User-login-image](./docs/User/User_login-%20Error_message.png) 
 
+Error:”Token has expired” 401 Unauthorised
+ ![User-login-image](./docs/User/User_token_expired_msg.png)
 
 #### UPDATE a User
 
@@ -410,9 +417,11 @@ Path/Route: http://localhost:8000/auth/users
 Required body/header – email, password, jwt token
 Response – 
     Success: “Updated changes successfully” 200 OK 
+![User-Update-image](./docs/User/Update_user_confirmation.png) 
     Error: “Missing Authorisation Header, 401 Unauthorised 
+![User-Update-image](./docs/User/User_login-%20Error_message.png)
     Error: “Token has expired” 401 Unauthorised 
-
+![User-Update-image](./docs/User/Update_User-token%20expired.png)
 #### GET All Users
 
 The user model is set up with specific attributes for the tables, and the controller actions these in the front end for the user. With the GET ALL user function the SQLAlchemy accesses the database and retrieves all users in the database.
@@ -421,6 +430,7 @@ Path/Route: http://localhost:8000/users
 Required body/header – 
 Response –
     Success: 200 Ok – returns all users in the database to the view 
+![User-Get_ALL-image](./docs/User/Get_%20All_Users.png)
     Error: “No users to view” 
 
 #### GET a Specific User
@@ -431,8 +441,9 @@ Path/Route: http://localhost:8000/auth/<int:user_id>
  
 Response –
     Success: 200OK
+![User_Get_One-image](./docs/User/Get_One_User.png)
     Error: “No users to view, 200 OK
- 
+ ![User_Get_One-image](./docs/User/Get_One_User-Error.png)
 
 
 #### DELETE a USER
@@ -443,10 +454,15 @@ Path or Route: http://localhost:8000/auth/1
 Required body/header – Authorisation: bearer token for user authentication
 Response – 
     Success: “User with user_id <user_id> has been successfully delted.” 200 OK 
-    Error: “Only admin can perform this delete functions.” 403 Forbidden
+![User_Delete-image](./docs/User/Delete_User.png)
 
+    Error: “Only admin can perform this delete functions.” 403 Forbidden
+![User_Delete-image](./docs/User/Delete_User-error_%20msg.png)
  
 ### Product Controller
+
+![Product_Controller-image](./docs/product_model.png)
+
 #### CREATE a Product
 The product model is set up with specific attributes for the tables, and the controller actions these from the front end user input. The CREATE a product functions allows the user to input data into specific fields to add a product to the database. A JWT-Token is required to add a product to the database
  
@@ -455,7 +471,10 @@ Path/Route: http://localhost:8000/products
 Required body/header – name, description, category, user_id, JWT_Token
 Response –
     Success: 201 Created 
+![Product_Create-image](./docs/Product/Product_add.png)
+
     Error: “Invalid”, 400
+
 
 #### UPDATE a PRODUCT
 The product model is set up with specific attributes for the tables, and the controller actions these from the front end user input. The UPDATE function allows the user to input data into specific fields to update a product in the database, a JWT_Token is also required to update a product.
@@ -465,11 +484,9 @@ Path or Route: http://localhost:8000/products/<product_id>
 Required body/header – Authorisation: bearer token for user authentication, product_id, then the fields that are to updated
 Response – 
     Success: “200 OK” 
+![Product_Update-image](./docs/Product/Produc_update.png)
     Error: “Product with product_id: {product_id} could not be found”, (404 Not Found)
- 
-
-
-
+![Product_Update-image](./docs/Product/Product_update-%20Error.png)
 
 #### GET a PRODUCT
 The product model is set up with specific attributes for the tables, and the controller actions these from the front end user input. The GET a Product function allows the user to input <product_id> retrieve a specific product in the database.
@@ -479,7 +496,10 @@ Path or Route: http://localhost:8000/product/<product_id>
 Required body/header – Authorisation: bearer token for user authentication
 Response – 
     Success: “Review was successfully created” 
+![Product_GET-image](./docs/Product/Get_Product.png)
     Error: “No product with {product_id} has been found” 404
+![Product_GET-image](./docs/Product/Get_Product_error.png)
+
 
 #### GET all Products
 The product model is set up with specific attributes for the tables, and the controller actions these from the front end user input. The GET ALL Products function allows the user to retrieve all products in the database.
@@ -490,6 +510,7 @@ Path/Route: http://localhost:8000/products
 Required body/header – products
 Response –
     Success: 
+![Product_Get-image](./docs/Product/Get_All_Products.png)
     Error: “Invalid, products not found”, 404
 
 
@@ -501,9 +522,14 @@ Path or Route: http://localhost:8000/products
 Required body/header – Authorisation: bearer token for user authentication/ <int:product_id>
 Response – 
     Success:  “Product {product_id} has been deleted!” 
+![Product_Delete-image](./docs/Product/Product_Delete.png)
+
     Error: “Missing Authorisation Header” 401 Unathorised 
+![Product_Delete-image](./docs/Product/Product_Delete-Error.png)
+
 
 ### Review Controller
+![Review_Controller-image](./docs/review_model.png)
 
 #### ADD a Review
 HTTP Verb – POST
@@ -513,7 +539,10 @@ Path/Route: http://localhost:8000/products/<int:product_id>/reviews
 Required body/header – JWT Token, Rating, comment
 Response – 
     Success: 201 Created OK 
+![Review_Add-image](./docs/Review/Review_Add.png)
+
     Error: "Product with <int:product_id> has not been found." (404 Not Found) 
+![Review_Add-image](./docs/Review/Review_Add-Error.png)
     Error: “You are not authorised to update this review”, (403 Forbidden)
 
 #### UPDATE a Review
@@ -524,8 +553,9 @@ Path/Route: http://localhost:8000/products/<int:product_id>/reviews/<int:review_
 Required body/header – product_id  and review_id to update, JWT_Token
 Response - 
     Success: “200 OK 
+![Review_Update-image](./docs/Review/Review_Update_Comment-Rating.png)
     Error: “Review with {review_id} as not been found” 404 
-
+![Review_Update-image](./docs/Review/Review_Update_Error.png)
 
 #### GET a Review by PRODUCT ID
 The REVIEW model is set up with specific attributes for the tables, and the controller actions these from the front end user input. The GET a REVIEW by Product function allows the user to fetch a review for a specific product in the database. Must have both product id and review id.
@@ -535,12 +565,10 @@ Path/Route: http://localhost:8000/products/<int:products_id>/reviews
 Required body/header:, product_id,
 Response – 
     Success: , (200 OK) 
-
-
- 
+![Review_GET-image](./docs/Review/Review_Get_Product_Review.png)
 
     Error: “User not found”, (404 Not Found)
-
+![Review_GET-image](./docs/Product/Product_review_error.png)
 
 #### DELETE a Review
 The REVIEW model is set up with specific attributes for the tables, and the controller actions these from the front end user input. The DELETE a REVIEW must have product_id and review_id for the function to allow the user to DELETE a review for a specific product in the database. Must have JWT_Token and auth_as_admin Admin user only can delete.  
@@ -550,8 +578,9 @@ Path/Route: http://localhost:8000/products/<int:products_id> / <int:review_id>
 Required body/header –product_id, review_id plust JWT_Token  & Admin Authorisation: Bearer token for user authentication.
 Response - 
     Success: “Message: {review_comment}”, (200 OK) 
+![Review_Delete-image](./docs/Review/Review_Delete.png)
     Error: “Review with {review_id} has not be found”, (404 Not Found) 
-
+![Review_Delete-image](./docs/Review/Review_Delete-Error.png)
 
 These API endpoints provide a comprehensive way to interact with the product review’s backend. It creates, retrieves, updates, and deletes user review while ensuring the data integrity and user authentication is maintained throughout the use of the app, the use of appropriate headers and error handling makes this a robust and scalable product review system.
 
