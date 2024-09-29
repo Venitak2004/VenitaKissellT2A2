@@ -377,7 +377,7 @@ Path or Route: http://localhost:8000/auth/register
 
 Required body/header –username, email, display_name, password 
 
-
+![User-create-image](./docs/user/Add%20User.png.PNG)
  
 Response – 
 	Success:201 Created 
